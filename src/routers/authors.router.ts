@@ -1,13 +1,10 @@
 import { Router } from "express";
-//import * as authorsController from "../controllers/authors.controller";
+import * as authorController from "../controllers/authors.controller";
 import schemaValidation from "../middlewares/schemaValidation.middleware";
 import { authorSchema } from "../schemas/author.schema";
 
-const platformsRouter = Router();
-platformsRouter.get("/platforms");
-platformsRouter.post(
-  "/platforms",
-  schemaValidation(authorSchema)
-);
+const authorsRouter = Router();
+authorsRouter.get("/authors", authorController.listAuthors);
+authorsRouter.post("/authors", schemaValidation(authorSchema), authorController.newAuthor);
 
-export default platformsRouter;
+export default authorsRouter;
